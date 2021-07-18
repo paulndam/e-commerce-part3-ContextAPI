@@ -7,6 +7,7 @@ import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "./Redux/Store/store";
+import CartProvider from "./Provider/Cart-Provider/CartProvider";
 
 ReactDOM.render(
   // provider is the components that is the parent of all the other components
@@ -14,7 +15,9 @@ ReactDOM.render(
     <BrowserRouter>
       <React.StrictMode>
         <PersistGate persistor={persistor}>
-          <App />
+          <CartProvider>
+            <App />
+          </CartProvider>
         </PersistGate>
       </React.StrictMode>
     </BrowserRouter>

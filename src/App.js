@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
@@ -13,15 +13,19 @@ import CheckOut from "./pages/CheckOut/CheckOut";
 import { setCurrentUser } from "./Redux/UserReducer/userAction";
 import { selectCurrentUser } from "./Redux/UserReducer/userSelector";
 import { checkUserSession } from "./Redux/UserReducer/userAction";
+import CurrentUserContext from "./Context/CurrentUser/Current-User-Context";
 
 const App = ({ currentUser, checkUserSession }) => {
   useEffect(() => {
+    //setUser(currentUser)
     checkUserSession();
   }, [checkUserSession]);
 
   return (
     <div>
-      <Header />
+      <CurrentUserContext.Provider value={currentUser}>
+        <Header />
+      </CurrentUserContext.Provider>
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/shop" component={ShopPage} />

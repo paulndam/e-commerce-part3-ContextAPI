@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import "../../Sass/header.styles.scss";
@@ -14,8 +14,13 @@ import {
   OptionsContainer,
   OptionLink,
 } from "./HeaderStyles";
+import CurrentUserContext from "../../Context/CurrentUser/Current-User-Context";
+import { CartContext } from "../../Provider/Cart-Provider/CartProvider";
 
-const Header = ({ currentUser, hidden, signOutStart }) => {
+const Header = ({ signOutStart }) => {
+  const currentUser = useContext(CurrentUserContext);
+  const { hidden } = useContext(CartContext);
+
   return (
     <HeaderConatiner>
       <LogoContainer to="/">
